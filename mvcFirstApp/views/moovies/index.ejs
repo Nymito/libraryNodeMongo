@@ -1,0 +1,23 @@
+<h2>Search Moovie</h2>
+
+<form action="/moovies" method="GET">
+    <div>
+        <label>Title</label>
+        <input type="text" name="title" value="<%= searchOptions.title %>">
+    </div>
+    <div>
+        <label>Published After</label>
+        <input type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter %>">
+    </div>
+    <div>
+        <label>Published Before</label>
+        <input type="date" name="publishedBefore" value="<%= searchOptions.publishedBefore %>">
+    </div>
+    <button type="submit">Search</button>
+</form>
+<br>
+<div>
+    <% moovies.forEach(moovie => { %>
+        <img height='150' width="100" src="<%= moovie.coverImagePath %>">
+    <% }) %> 
+</div>

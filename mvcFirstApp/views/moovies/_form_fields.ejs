@@ -20,7 +20,7 @@
 </div>
 <div>
     <label>Duration</label>
-    <input type="string" name="duration" min="1" value=""+<%= moovie.duration%>>
+    <input type="string" name="durationHour" min="1" value=""+<%= moovie.durationHour%>> h <input type="string" name="durationMin" min="1" value=""+<%= moovie.durationMin%>>min
 </div>
 <div>
     <label>Cover</label>
@@ -30,17 +30,3 @@
     <label>Description</label>
     <textarea type="string" name="description"><%= moovie.description %></textarea>
 </div>
-
-<script>
-    function minutsToHm(d) {
-        d = Number(d);
-        var h = Math.floor(d / 60);
-        var m = Math.floor(d % 60);
-    
-
-        var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-        var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes") : "";
-       
-        return hDisplay + mDisplay; 
-    }
-</script>
