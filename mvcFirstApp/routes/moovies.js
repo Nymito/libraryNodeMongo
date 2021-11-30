@@ -3,19 +3,12 @@ const express =  require('express')
 const router = express.Router()
 const Moovie = require('../models/moovie')
 const Author = require('../models/author')
-const Multer = require('multer')
-const path = require('path')
+
 const fs = require('fs')
-const uploadPath = path.join('public', Moovie.coverImageBasePath)
 
 //all different image types that we accept
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
-const upload = Multer({
-    dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-        callback(null, imageMimeTypes.includes(file.mimetype))
-    }
-})
+
 // ALL moovies roue
 router.get('/', async ( req, res) => {
     let query =  Moovie.find()
@@ -47,8 +40,7 @@ router.get('/new', async (req,res)=>{
 
 // Create moovie route
 
-router.post('/', upload.single('cover'), async (req,res)=>{
-    const fileName = req.file != null ? req.file.filename : null
+router.post('/', async (req,res)=>{
     const moovie = new Moovie({
         title: req.body.title,
         author: req.body.author,
@@ -56,18 +48,15 @@ router.post('/', upload.single('cover'), async (req,res)=>{
         durationHour: parseInt(req.body.durationHour),
         durationMin: parseInt(req.body.durationMin),
         description: req.body.description,
-        coverImageName: fileName,
     })
+    saveCover(moovie, req.body.cover)
+
     try{
         const newMoovie = await moovie.save()
         //res.redirect(`moovies/${newMoovie.id}`)
         res.redirect('moovies')
     }catch{
-        //console.error(e)
-        if (moovie.coverImageName != null ){
-            removeMoovieCover(moovie.coverImageName)
-        }
-        
+        //console.error(e)      
         renderNewPage(res, moovie, true)
     }
 })
@@ -86,9 +75,13 @@ async function renderNewPage(res, moovie, hasError = false) {
     }
 }
 
-function removeMoovieCover(fileName){
-    fs.unlink(path.join(uploadPath, fileName), err =>{
-        if (err) console.err(err)
-    })
+function saveCover(moovie, coverEncoded){
+    if( coverEncoded == null) return
+
+    const cover = JSON.parse(coverEncoded)
+    if( cover != null && imageMimeTypes.includes(cover.type)){
+        moovie.coverImage = new Buffer.from(cover.data, 'base64')
+        moovie.coverImageType = cover.type
+    }
 }
 module.exports = router
