@@ -18,6 +18,8 @@
 <br>
 <div>
     <% moovies.forEach(moovie => { %>
-        <img height='150' width="100" src="<%= moovie.coverImagePath %>">
+        <a href="/moovies/<%= moovie.id %>">
+            <img height='150' width="100" src="<%= moovie.coverImagePath %>">
+        </a>
     <% }) %> 
 </div>

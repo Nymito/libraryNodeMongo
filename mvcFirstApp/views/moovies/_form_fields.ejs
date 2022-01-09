@@ -6,7 +6,7 @@
     <label>Author</label>
     <select name="author">
         <% authors.forEach(author => { %>
-            <% if (author.id === moovie.author) { %>
+            <% if (`${author.id}` === `${moovie.author}`) { %>
                 <option selected label="<%= author.name %>" value= "<%= author.id %>"></option>
             <% }else { %>
                 <option  label="<%= author.name %>" value= "<%= author.id %>"></option>
@@ -20,7 +20,7 @@
 </div>
 <div>
     <label>Duration</label>
-    <input type="string" name="durationHour" min="1" value=""+<%= moovie.durationHour%>> h <input type="string" name="durationMin" min="1" value=""+<%= moovie.durationMin%>>min
+    <input type="string" name="durationHour" min="1" value=<%= moovie.durationHour %>> h <input type="string" name="durationMin" min="1" value=<%= moovie.durationMin %>>min
 </div>
 <div>
     <label>Cover</label>

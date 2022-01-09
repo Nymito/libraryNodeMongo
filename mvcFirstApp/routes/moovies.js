@@ -5,6 +5,7 @@ const Moovie = require('../models/moovie')
 const Author = require('../models/author')
 
 const fs = require('fs')
+const { redirect } = require('express/lib/response')
 
 //all different image types that we accept
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
@@ -53,26 +54,112 @@ router.post('/', async (req,res)=>{
 
     try{
         const newMoovie = await moovie.save()
-        //res.redirect(`moovies/${newMoovie.id}`)
-        res.redirect('moovies')
+        res.redirect(`moovies/${newMoovie.id}`)
+        
     }catch{
         //console.error(e)      
         renderNewPage(res, moovie, true)
     }
 })
 
-async function renderNewPage(res, moovie, hasError = false) {
+//show moovie route
+router.get('/:id', async (req, res) =>{
+    try{
+        const moovie = await Moovie.findById(req.params.id).populate('author').exec()
+        res.render('moovies/show', {moovie:moovie})
+    }catch{
+        res.redirect('/')
+    }
+})
+
+// edit moovie
+router.get('/:id/edit', async (req,res)=>{
+    try{
+        const moovie = await Moovie.findById(req.params.id)
+        renderEditPage(res, moovie)
+    }catch{
+        res.redirect('/')
+    }
+    
+})
+
+// Update moovie route
+
+router.put('/:id', async (req,res)=>{
+    let moovie
+    try{
+        moovie = await Moovie.findById(req.params.id)
+        moovie.title = req.body.title
+        moovie.author = req.body.author
+        moovie.publishDate = new Date(req.body.publishDate)
+        moovie.durationHour = req.body.durationHour
+        moovie.durationMin = req.body.durationMin
+        moovie.description = req.body.description
+        if(req.body.cover != null && req.body.cover!= ""){
+            saveCover(moovie,req.body.cover)
+        }
+        await moovie.save()
+        res.redirect(`/moovies/${moovie.id}`)
+        
+    }catch{
+        if(moovie !=null){
+            renderEditPage(res, moovie, true)
+        }else {
+            res.redirect("/")
+        }
+        //console.error(e)      
+        
+    }
+})
+
+
+//delete moovie page route
+router.delete('/:id', async (req,res) => {
+    let moovie
+    try{
+        moovie = await Moovie.findById(req.params.id)
+        await moovie.remove()
+        res.redirect('/moovies')
+    }catch{
+        if( moovie != null ){
+            res.render('/moovies/show', {
+                moovie: moovie,
+                errorMessage: 'Could not remove the moovie'
+            })
+        }else {
+            res.redirect('/')
+        }
+    }
+})
+
+
+async function renderFormPage(res, moovie, form, hasError = false) {
     try{
         const authors = await Author.find({})
         const params = {
             authors:authors,
             moovie:moovie
         }
-        if(hasError) params.errorMessage = 'Error creating moovie'
-        res.render('moovies/new', params)
+        if(hasError){
+            if(form === 'edit') params.errorMessage = 'Error updating moovie'
+            else params.errorMessage = 'Error creating moovie'
+            
+        }
+        
+        
+        res.render(`moovies/${form}`, params)
     }catch {
         res.redirect('/moovies')
     }
+}
+
+async function renderNewPage(res, moovie, hasError = false) {
+    renderFormPage(res,moovie, 'new', hasError )
+}
+
+
+async function renderEditPage(res, moovie, hasError = false) {
+    renderFormPage(res,moovie, 'edit', hasError )
 }
 
 function saveCover(moovie, coverEncoded){
