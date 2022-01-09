@@ -1,0 +1,6 @@
+<h2>Edit Moovie</h2>
+<form action="/moovies/<%= moovie.id %>?_method=PUT" method="POST" >
+    <%- include('_form_fields') %> 
+    <a href="/moovies">Cancel</a>
+    <button type="submit">Update</button>
+</form>

@@ -1,0 +1,10 @@
+<h2><%= moovie.title %></h2>
+<img src="<%= moovie.coverImagePath %>" width="100" height="150">
+<div>Author : <%= moovie.author.name %></div>
+<div>Publish Date : <%= moovie.publishDate.toDateString() %></div>
+<div>Duration : <%= moovie.durationHour %>h<%= moovie.durationMin %> min</div>
+<div>Description : <%= moovie.description %></div>
+
+<a href="/moovies/<%= moovie.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', {url: `/moovies/${moovie.id}`}) %>
+<a href="/authors/<%= moovie.author.id %>">View Author</a>
