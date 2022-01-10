@@ -14,12 +14,26 @@
     <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script defer src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
     <script defer src="/javascripts/fileUpload.js"></script>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/a2d8dbc6eb.js"></script>
     <title>Mybrary</title>
 </head>
 <body>
     <%- include('../partials/header.ejs') %> 
-    <%- include('../partials/errorMessage.ejs') %> 
-    Text here
-    <%- body %> 
+    <div class="container">
+        
+        <div class="inner-container">
+            <%- include('../partials/errorMessage.ejs') %> 
+            <%- body %> 
+        </div>
+    </div>
 </body>
 </html>
+<style>
+    body{
+        background-color: var(--color-background);
+        color: white;
+    }
+    
+</style>

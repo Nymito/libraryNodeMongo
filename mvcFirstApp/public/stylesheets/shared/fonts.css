@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Economica';
+    src: url('/fonts/Economica-BoldItalic.woff2') format('woff2'),
+        url('/fonts/Economica-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Economica';
+    src: url('/fonts/Economica-Italic.woff2') format('woff2'),
+        url('/fonts/Economica-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Economica';
+    src: url('/fonts/Economica-Bold.woff2') format('woff2'),
+        url('/fonts/Economica-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Economica';
+    src: url('/fonts/Economica-Regular.woff2') format('woff2'),
+        url('/fonts/Economica-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
