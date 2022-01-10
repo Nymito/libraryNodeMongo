@@ -1,6 +1,7 @@
 @import 'shared/fonts.css';
 @import 'shared/variables.css';
 @import 'shared/header.css';
+@import 'shared/forms.css';
 
 :root {
     font-family: 'Economica';

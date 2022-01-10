@@ -1,4 +1,4 @@
-<h2>Search Moovie</h2>
+<h2 class="text-center" style="margin-top: 5%; margin-bottom: 3%;">MOOVIES</h2>
 
 <form action="/moovies" method="GET">
     <div>
@@ -16,10 +16,26 @@
     <button type="submit">Search</button>
 </form>
 <br>
-<div>
+<div class="card-deck" style="width: 100%;">
     <% moovies.forEach(moovie => { %>
-        <a href="/moovies/<%= moovie.id %>">
-            <img height='150' width="100" src="<%= moovie.coverImagePath %>">
-        </a>
+        <div class="card bg-dark">
+            <a href="/moovies/<%= moovie.id %>">
+                <img class="card-img-top" src="<%= moovie.coverImagePath %>">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title"><%= moovie.title %></h5>
+              <p class="card-text"><%= moovie.description %></p>
+            </div>
+        </div>
     <% }) %> 
+    
 </div>
+<style>
+    .card-deck{
+        margin-top: 10px;
+        margin-left: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-gap: .5rem;
+    }
+</style>

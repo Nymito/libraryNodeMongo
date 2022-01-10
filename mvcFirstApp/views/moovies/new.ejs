@@ -1,6 +1,9 @@
-<h2>New Moovie</h2>
+<h2 style="font-family: 'Economica';" class="text-center">New Moovie</h2>
 <form action="/moovies" method="POST" >
     <%- include('_form_fields') %> 
-    <a href="/moovies">Cancel</a>
-    <button type="submit">Create</button>
+    <div class="mt-5 ml-4">
+        <a href="/moovies"><button type="button" class="btn btn-outline-secondary">Cancel</button></a>
+        <button type="submit" class="btn btn-outline-success">Create</button>
+    </div>
+    
 </form>
