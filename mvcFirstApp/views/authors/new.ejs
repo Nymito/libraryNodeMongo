@@ -1,6 +1,8 @@
-<h2>New Author</h2>
+<h2 class="title-page">NEW DIRECTOR</h2>
 <form action="/authors" method="POST">
     <%- include('_form_fields') %> 
-    <a href="/authors">Cancel</a>
-    <button type="submit">Create</button>
+    <div class="mt-5 ml-4">
+        <a href="/authors"><button type="button" class="btn btn-outline-secondary">Cancel</button></a>
+        <button type="submit" class="btn btn-outline-success">Create</button>
+    </div>
 </form>
