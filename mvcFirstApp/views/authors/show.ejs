@@ -1,13 +1,40 @@
-<h2> <%= author.name %> </h2>
-<a href="/authors/<%= author.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm', 
-            { url: `/authors/${author.id}`}) %>
+<h2 class="title-page">AUTHOR</h2>
+
 
 <% if(mooviesByAuthor.length > 0) { %>
-    <h2>Moovies By Author</h2>
+    
+    <div style="font-weight: 100;" class="textAuthor">Name : <%= author.name %></div>
+    <hr>
+    <div style="font-weight: 100;" class="textAuthor">Movies : </div>
     <% mooviesByAuthor.forEach(moovie => { %>
         <a href="/moovies/<%= moovie.id %>">
             <img height='150' width="100" src="<%= moovie.coverImagePath %>">
         </a>
     <% }) %> 
+    <hr>
 <% } %>
+
+
+<div>
+    <a style="position: absolute; left: 650px; top: 210px;" href="/authors/<%= author.id %>/edit"><button type="button" class="btn btn-outline-secondary">Edit</button></a>
+</div>
+
+<form method="POST" action="/authors/<%= author.id %>?_method=DELETE">
+    <div class="">
+        <button type="submit" class="btn btn-outline-danger" style="position: absolute; left:730px;top: 210px;">Delete</button>
+    </div>
+</form> 
+
+<style>
+
+    img{
+        object-fit: cover;
+        height: 400px;
+        width: 300px;
+        margin-right: 1rem;
+    }
+    .textAuthor{
+        font-weight: 100;
+        margin-bottom: 1rem;
+    }
+</style>
