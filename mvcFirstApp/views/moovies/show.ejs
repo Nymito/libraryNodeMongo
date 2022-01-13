@@ -5,7 +5,7 @@
         <div class="about-text">Director : <%= moovie.author.name %></div>
         <div class="about-text">Publish Date : <%= moovie.publishDate.toDateString() %></div>
         <div class="about-text">Duration : <%= moovie.durationHour %>h<%= moovie.durationMin %> min</div>
-        <div class="about-text">Description : <%= moovie.description %></div>
+        <div class="about-text description-text">Description : <%= moovie.description %></div>
     </div>
     
     
@@ -30,5 +30,10 @@
     .about-text{
         font-weight: 100;
         margin-top: 1rem;
+    }
+    .description-text{
+        width: 580px;
+        height: 270px;
+        overflow: hidden;
     }
 </style>
