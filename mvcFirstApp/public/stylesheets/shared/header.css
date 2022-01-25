@@ -1,3 +1,107 @@
+@import '/public/img/logoMVC.png';
+
 .link-nav{
     color: black;
+}
+
+.container2{
+    width: 90%;
+    
+    position: relative;
+    z-index: 999;
+}
+
+.navbar2{
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3d3d3d;
+    width: 100vw;
+}
+
+
+.nav-logo{
+    width: 200px;
+    height: 90px;
+    text-decoration: none;
+    background: url('/img/logoMVC.png') center no-repeat;
+    margin-left: 3rem;
+    background-size: cover;
+
+}
+
+.nav-ite{
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+    font-family: 'Economica';
+    align-items: center;
+ }
+
+.nav-ite:visited, .nav-ite:link, .nav-ite:active
+{
+    text-decoration: none;
+}
+
+.nav-item-logo{
+    display: flex;
+    color: rgb(181, 150, 207); 
+    font-size: 1rem;
+    margin-right: 0.2rem;
+}
+
+.nav-ite:hover .nav-item-logo{
+    color:  #bd61da;
+}
+.nav-ite:hover{
+    color: white ;
+}
+
+.nav-links{
+    display: flex;
+    text-decoration: none;
+}
+
+
+/* MOBILE OR LITTLE SCREEN  */
+@media (max-width: 930px) {
+
+    .nav-ite{
+        /*. display: none; */
+        width: 100%;
+        font-size: 1.2rem;
+        margin-left: 0;
+    }
+    
+    .nav-logo{
+        display: none;
+    }
+    .nav-item-logo{
+        font-size: .7rem;
+    }
+    .navbar{
+        flex-direction: column;
+        height: 150px;
+    }
+    .nav-links{
+        width: 90vw;
+        height: 70px;
+        margin-right: auto;
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+    .header-bg{
+        top: 150px;
+    }
+    .header{
+        height: 670px;
+    }
 }

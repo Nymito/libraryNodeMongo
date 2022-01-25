@@ -7,6 +7,7 @@ const authorSchema = new mongoose.Schema({
     }
 })
 
+// running this before w try to remove any author
 authorSchema.pre('remove', function(next) {
     Moovie.find({author:this.id}, (err, moovies) =>{
         if(err){
